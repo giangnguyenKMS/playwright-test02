@@ -25,9 +25,6 @@ jobs:
           echo "Actor: ${{ github.actor }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "Action_repository: ${{ github.action_repository }}"
-          echo "repository_owner: ${{ github.repository_owner }}"
-          echo "repository_id: ${{ github.repository_id }}"
-          echo "repository_owner_id: ${{ github.repository_owner_id }}"
           echo "BDD Tags: @${{ github.event.inputs.TAG_NAME }}"
           echo "Run ENV: ${{ github.event.inputs.ENV_NAME }}"
 
@@ -61,26 +58,26 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: main
-        path: main
+        ref: gh-pages
+        path: gh-pages
 
     # Build Allure report
     - name: Build test report
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-        gh_pages: main
+        gh_pages: gh-pages
         allure_history: allure-history
         allure_results: build/allure-results
 
-    # Get Allure report
-    - name: Publish test report
-      uses: peaceiris/actions-gh-pages@v3
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: main
-        publish_dir: allure-history
+    # Deploy Allure report to Github Pages
+    # - name: Publish test report
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   if: always()
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_branch: gh-pages
+    #     publish_dir: allure-history
   
     - uses: actions/upload-artifact@v3
       if: always()
@@ -92,6 +89,6 @@ jobs:
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: allure-history
-        path: allure-history/
+        name: allure-results
+        path: allure-results
         retention-days: 30
