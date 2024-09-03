@@ -3,7 +3,7 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 auth.json
-/tests/allure-results/
-/tests/allure-reports/
+/allure-results/
+/allure-reports/
 /.idea/
 .idea
