@@ -6,3 +6,4 @@ auth.json
 /tests/allure-results/
 /tests/allure-reports/
 /.idea/
+.idea
