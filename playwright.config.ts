@@ -17,7 +17,7 @@ export default defineConfig({
       "allure-playwright",
       {
         detail: true,
-        resultsDir: "./tests/allure-reports",
+        resultsDir: "allure-results",
         suiteTitle: false,
       },
     ],
