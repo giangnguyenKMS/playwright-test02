@@ -47,40 +47,75 @@ jobs:
       - name: install playwright browsers
         run: npx playwright install --with-deps
 
-      # # Setup Xvfb to run headless mode
-      # - run: sudo apt-get install xvfb
+      # Setup Xvfb to run headless mode
+      - run: sudo apt-get install xvfb
 
-      # # Run test cases with X virtual framebuffer (Xvfb)
-      # - name: Run Playwright tests
-      #   run: xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' npx playwright test
+      # Run test cases with X virtual framebuffer (Xvfb)
+      - name: Run Playwright tests
+        run: xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' npx playwright test
 
-      - run: npx playwright test
+      # - run: npx playwright test
 
       # Load source code to get Allure results
-      - name: Load test report history
-        uses: actions/checkout@v3
+      # - name: Load test report history
+      #   uses: actions/checkout@v3
+      #   if: always()
+      #   continue-on-error: true
+      #   with:
+      #     ref: gh-pages
+      #     path: gh-pages
+
+      # # - uses: actions/upload-artifact@v3
+      # #   if: always()
+      # #   with:
+      # #     name: allure-results
+      # #     path: allure-results
+
+      # - name: Allure Report action from marketplace
+      #   uses: simple-elf/allure-report-action@master
+      #   if: always()
+      #   #id: allure-report
+      #   with:
+      #     allure_results: allure-results
+      #     #gh_pages: gh-pages
+      #     #allure_report: allure-report
+      #     allure_history: allure-history
+      #     keep_reports: 20
+          
+      # - name: Deploy report to Github Pages
+      #   if: always()
+      #   uses: peaceiris/actions-gh-pages@v2
+      #   env:
+      #     PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PUBLISH_BRANCH: gh-pages
+      #     PUBLISH_DIR: allure-history
+
+  allure:
+    name: Generate Allure Report
+    runs-on: ubuntu-latest\
+    needs: regression_test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
 
-      # - uses: actions/upload-artifact@v3
-      #   if: always()
-      #   with:
-      #     name: allure-results
-      #     path: allure-results
-
-      - name: configure allure using allure report action
+      - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
-        id: allure-report
+        #id: allure-report
         with:
-          allure_results: tests/allure-reports
-          gh_pages: gh-pages
-          allure_report: allure-report
+          allure_results: allure-results
+          #gh_pages: gh-pages
+          #allure_report: allure-report
           allure_history: allure-history
-          
+          keep_reports: 20
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
