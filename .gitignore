@@ -3,7 +3,4 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 auth.json
-/allure-results/
-/allure-reports/
 /.idea/
-.idea
