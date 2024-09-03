@@ -47,14 +47,14 @@ jobs:
       - name: install playwright browsers
         run: npx playwright install --with-deps
 
-      # Setup Xvfb to run headless mode
-      - run: sudo apt-get install xvfb
+      # # Setup Xvfb to run headless mode
+      # - run: sudo apt-get install xvfb
 
-      # Run test cases with X virtual framebuffer (Xvfb)
-      - name: Run Playwright tests
-        run: xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' npx playwright test
+      # # Run test cases with X virtual framebuffer (Xvfb)
+      # - name: Run Playwright tests
+      #   run: xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' npx playwright test
 
-      # - run: npx playwright test
+      - run: npx playwright test --grep ${{ github.event.inputs.TAG_NAME }}
 
       # Load source code to get Allure results
       # - name: Load test report history
@@ -108,12 +108,11 @@ jobs:
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
-        #id: allure-report
+        # id: allure-report
         with:
-          allure_results: allure-results
-          #gh_pages: gh-pages
-          #allure_report: allure-report
-          allure_history: allure-history
+          gh_pages: gh-pages
+          allure_results: '$(build.artifactstagingdirectory)\allure-results'
+          allure_history: '${{github.run_number}}'
           keep_reports: 20
 
       - name: Deploy report to Github Pages
@@ -122,4 +121,4 @@ jobs:
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+          PUBLISH_DIR: '${{github.run_number}}'
