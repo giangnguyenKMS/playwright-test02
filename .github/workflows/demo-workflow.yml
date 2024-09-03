@@ -71,13 +71,13 @@ jobs:
         allure_results: build/allure-results
 
     # Deploy Allure report to Github Pages
-    # - name: Publish test report
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   if: always()
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_branch: gh-pages
-    #     publish_dir: allure-history
+    - name: Publish test report
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-history
   
     - uses: actions/upload-artifact@v3
       if: always()
