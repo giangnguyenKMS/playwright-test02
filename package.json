@@ -11,5 +11,8 @@
     "@playwright/test": "^1.46.1",
     "@types/node": "^22.5.2",
     "allure-playwright": "^3.0.0-beta.11"
+  },
+  "dependencies": {
+    "playwright-test02": "file:"
   }
 }
