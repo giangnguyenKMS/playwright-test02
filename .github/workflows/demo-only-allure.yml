@@ -1,4 +1,4 @@
-name: 3. Demo Playwright workflow
+name: 3. Demo Playwright workflow with simple Allure report
 
 on:
   workflow_dispatch: 
@@ -52,7 +52,7 @@ jobs:
 
     - name: Generate Allure report
       if: always()
-      run: npx allure serve allure-results
+      run: allure generate ./allure-results
 
     # - name: Patch Allure report
     #   if: always()
