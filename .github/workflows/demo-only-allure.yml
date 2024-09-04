@@ -47,13 +47,16 @@ jobs:
 
     - run: npx playwright test
 
+    - name: Install Allure package
+      run: npm i -D allure-playwright
+
     - name: Generate Allure report
       if: always()
-      run: npm run report:generate
+      run: npx allure serve allure-results
 
-    - name: Patch Allure report
-      if: always()
-      run: npm run report:patch
+    # - name: Patch Allure report
+    #   if: always()
+    #   run: npm run report:patch
 
     - name: Setup GitHub Pages
       if: always()
