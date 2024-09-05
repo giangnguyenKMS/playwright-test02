@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Sep 05 15:45:11 GMT 2024","Thu Sep 05 15:45:11 GMT 2024","349","chromium","","","","","@demo_fixture Test case 2",""
+"passed","Thu Sep 05 15:45:14 GMT 2024","Thu Sep 05 15:45:17 GMT 2024","3168","teardown","","","","","Clean up",""
+"passed","Thu Sep 05 15:45:12 GMT 2024","Thu Sep 05 15:45:13 GMT 2024","971","chromium","","","","","get started link",""
+"passed","Thu Sep 05 15:45:05 GMT 2024","Thu Sep 05 15:45:10 GMT 2024","5808","chromium","","","","","@demo_fixture authentication test",""
+"passed","Thu Sep 05 15:45:11 GMT 2024","Thu Sep 05 15:45:12 GMT 2024","656","chromium","","","","","has title",""
+"passed","Thu Sep 05 15:44:58 GMT 2024","Thu Sep 05 15:45:04 GMT 2024","5912","setup","","","","","Dependencies setup",""
